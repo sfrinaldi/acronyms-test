@@ -1,0 +1,65 @@
+# Converts latex acronym format to a rough markdown template for easier viewing
+name: Markdown Acronym Workflow
+
+on:
+  push:
+    - main
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+  workflow_dispatch:
+
+# Runs script and uploads new version if in main for markdown output
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v4
+        with:
+          repository: uasal/acronyms
+          path: acronyms
+          ssh-keys: ${{ secrets.SUBMODULE_CONTENT_PULL_KEY }}
+          persist-credentials: false
+
+      - name: Python Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Cache Install
+        run: |
+          pip install --upgrade pip
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt=get install pandoc
+
+      - name: Run Script
+        run: python utilities/latex_acronyms-to-markdown.py
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v5
+        # Upload even if it fails to better see issues
+        if: always()
+        with:
+          name: Markdown Acronyms
+          path: combined-acronyms.md
+
+      - name: Update README.md
+        run: pandoc *.md > README.md
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch_name=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_EN
+
+      - name: Update Files
+        if: ${{ github.ref == 'refs/heads/main'}}
+        run: |
+          git fetch                         # fetch branches
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add .
+          git diff-index --quiet HEAD ||  git commit -m "compiled requirements"  # commit to the repository (ignore if no modification)
+          git push origin ${{ env.branch_name }} # push to remote branch
