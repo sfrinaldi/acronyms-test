@@ -3,7 +3,8 @@ name: Markdown Acronym Workflow
 
 on:
   push:
-    - main
+    branches:
+      - main
   pull_request:
     types: [opened, reopened, edited, synchronize]
   workflow_dispatch:
