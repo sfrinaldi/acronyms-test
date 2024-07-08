@@ -42,9 +42,8 @@ jobs:
 
       - name: Update Files
         run: |
-          git fetch                         # fetch branches
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add .
-          git diff-index --quiet HEAD ||  git commit -m "compiled requirements"  # commit to the repository (ignore if no modification)
-          git push origin ${{ env.branch_name }} # push to remote branch
+          git diff-index --quiet HEAD ||  git commit -m "Generated Markdown Acronyms"  # commit to the repository (ignore if no modification)
+          git push 
