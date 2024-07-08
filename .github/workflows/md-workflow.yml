@@ -34,7 +34,7 @@ jobs:
           path: combined-acronyms.md
 
       - name: Update README.md
-        run: pandoc combined-acronyms.md info.md --standalone -o README.md
+        run: pandoc info.md combined-acronyms.md  --standalone -o README.md
 
       - name: Extract branch name
         shell: bash
