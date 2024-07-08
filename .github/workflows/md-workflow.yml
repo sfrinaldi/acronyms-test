@@ -41,7 +41,7 @@ jobs:
         run: python utilities/latex_acronyms-to-markdown.py
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         # Upload even if it fails to better see issues
         if: always()
         with:
