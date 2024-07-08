@@ -12,7 +12,8 @@ use. Rough script for generating a markdown file from the combinded .tex
 acronyms file provided as well.
 
 Results of the last latex to markdown conversion run shown below:
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
 
 Acronym Listing / Descriptions
 ==============================
