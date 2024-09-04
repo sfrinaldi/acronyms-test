@@ -15,22 +15,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout action
+      - name: Checkout Action
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
-      - name: Python Setup
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
-      - name: Cache Install
+      - name: Install Pandoc
         run: |
-          pip install --upgrade pip
-          pip install -r utilities/requirements.txt
-
+          sudo apt-get update
+          sudo apt-get install pandoc
       - name: Run Script
         run: python utilities/latex_acronyms-to-markdown.py
 
@@ -39,7 +30,7 @@ jobs:
         # Upload even if it fails to better see issues
         if: always()
         with:
-          name: Markdown-Acronyms
+          name: Markdown Acronyms
           path: combined-acronyms.md
 
       - name: Extract branch name
