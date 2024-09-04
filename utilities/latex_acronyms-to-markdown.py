@@ -37,7 +37,7 @@ info_File.close()
 for line in input_File:
     adjusted_line = replace_all(line, replacements)
     if line.startswith("%-"):
-        print("skipping line")
+        #print("skipping line")
     else:
         if line.startswith("% "):
             adjusted_line = "---------------------------------\n\n" + adjusted_line + "\n"

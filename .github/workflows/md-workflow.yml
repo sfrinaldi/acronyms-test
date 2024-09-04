@@ -19,7 +19,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Script
-        run: python utilities/latex_acronyms-to-markdown.py
+        run: |
+          rm -f combined-acronyms.md
+          python utilities/latex_acronyms-to-markdown.py
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
