@@ -9,6 +9,7 @@ For storing the latest versions of acronyms for other repos to pull from. Contai
 - **VERIFY** added acronyms are not already within the dictionary as this will cause issues in latex generating repositories that use this repo for acronym pulling.
   - Eventually, a check can be added to this repo for doing automatically. 
 - GitHub workflow will update this README.md files' markdown conversion run display and add a new [`combined-acronyms.md`](combined-acronyms.md) file with the adjustments.
+  - This format can be changed to a markdown table if of use in the future.
 
 **Results of the last latex to markdown conversion run shown below:**
 
