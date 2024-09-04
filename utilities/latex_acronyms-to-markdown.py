@@ -54,4 +54,4 @@ input_File.close()
 readme_File.close()
 output_File.close()
 
-print("Markdown Draft Created")
+print("Combined-acronyms.md file created. README.md updated.")
