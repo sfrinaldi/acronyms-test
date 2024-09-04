@@ -18,10 +18,6 @@ jobs:
       - name: Checkout Action
         uses: actions/checkout@v4
 
-      - name: Install Pandoc
-        run: |
-          sudo apt-get update
-          sudo apt-get install pandoc
       - name: Run Script
         run: python utilities/latex_acronyms-to-markdown.py
 
@@ -35,14 +31,14 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "branch_name=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_EN
+        run: echo "branch_name=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Update Files
-        if: ${{ github.ref == 'refs/heads/main'}}
+        #if: ${{ github.ref == 'refs/heads/main'}}
         run: |
           git fetch                         # fetch branches
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add .
           git diff-index --quiet HEAD ||  git commit -m "update markdown acronyms"  # commit to the repository (ignore if no modification)
-          git push origin ${{ env.branch_name }} # push to remote branch
+          git push # push to remote branch
